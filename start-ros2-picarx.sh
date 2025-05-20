@@ -1,5 +1,19 @@
 #!/bin/bash
 
+#!/bin/bash
+
+echo "🔍 Checking for Docker installation..."
+
+if ! command -v docker &> /dev/null; then
+  echo "🐋 Docker not found. Installing Docker..."
+
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sh get-docker.sh
+  usermod -aG docker $USER
+
+  echo "✅ Docker installed. You may need to reboot or log out/in."
+fi
+
 echo "🐳 Starting ROS 2 Docker container with mounted workspace..."
 
 docker run -it --rm \
