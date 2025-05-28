@@ -30,7 +30,14 @@ docker run -it --rm \
     echo '🔧 Installing essential packages...'
     apt install -y python3-pip python3-dev nano git curl build-essential \
                    python3-colcon-common-extensions python3-gpiozero \
-                   portaudio19-dev
+                   portaudio19-dev \
+		   python3-opencv \
+     		   ros-iron-cv-bridge \
+		   ros-iron-image-transport\
+               	   v4l-utils
+
+    echo '📷 Verifying camera device access...'
+    ls /dev/video* || echo '⚠️ No video devices found'
 
     echo '🐍 Installing Python dependencies...'
     pip3 install --upgrade pip

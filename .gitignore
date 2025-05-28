@@ -5,3 +5,11 @@ log/
 __pycache__/
 picar-x/
 robot-hat/
+core
+core
+*.jpg
+*.pyc
+__pycache__/
+build/
+install/
+log/
