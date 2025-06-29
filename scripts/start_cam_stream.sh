@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Load the loopback module
+echo "🔧 Loading v4l2loopback..."
+sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="LoopbackCam" exclusive_caps=1
+
+# Give system a moment to create the device
+sleep 1
+
 echo "🔍 Searching for available /dev/video* loopback device..."
 
 # Find the first available writable v4l2loopback device
