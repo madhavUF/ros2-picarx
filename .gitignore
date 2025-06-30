@@ -1,15 +1,28 @@
+# Build and install directories
 build/
 install/
 log/
-*.pyc
+
+# Python cache
 __pycache__/
-picar-x/
-robot-hat/
-core
-core
+*.pyc
+
+# Image files
 *.jpg
-*.pyc
-__pycache__/
-build/
-install/
-log/
+*.png
+images/
+
+# Docker files
+get-docker.sh
+
+# System files
+.DS_Store
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log

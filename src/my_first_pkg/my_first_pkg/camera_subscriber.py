@@ -20,7 +20,7 @@ class CameraSubscriber(Node):
     def listener_callback(self, msg):
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-            cv2.imwrite(f"/home/pi/ros2_ws/images/frame_{int(time.time())}.jpg", frame)
+            cv2.imwrite(f"/workspace/images/frame_{int(time.time())}.jpg", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.get_logger().info('🛑 Quit signal received, shutting down.')
                 rclpy.shutdown()

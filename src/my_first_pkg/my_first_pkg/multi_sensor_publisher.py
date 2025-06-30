@@ -1,3 +1,6 @@
+import os
+os.environ['GPIOZERO_PIN_FACTORY'] = 'lgpio'
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, String
@@ -10,16 +13,16 @@ class MultiSensorPublisher(Node):
         self.distance_pub = self.create_publisher(Float32, 'sensor/distance', 10)
         self.greyscale_pub = self.create_publisher(String, 'sensor/greyscale', 10)
 
-        # Ultrasonic setup
+        # Ultrasonic setup - remove active_state parameter that's causing issues
         self.trig = Pin("D2", mode=Pin.OUT)
-        self.echo = Pin("D3", mode=Pin.IN, active_state=True)
+        self.echo = Pin("D3", mode=Pin.IN)
 
-        # Grayscale sensors (Assuming D0, D1, D2; update based on your wiring)
+        # Grayscale sensors - remove active_state parameter
         self.greyscale_pins = [
-    		Pin("D0", mode=Pin.IN,active_state=True),
-    		Pin("D1", mode=Pin.IN,active_state=True),
-    		Pin("D4", mode=Pin.IN,active_state=True)
-	]
+            Pin("D0", mode=Pin.IN),
+            Pin("D1", mode=Pin.IN),
+            Pin("D4", mode=Pin.IN)
+        ]
 
         self.timer = self.create_timer(1.0, self.publish_sensors)
         self.get_logger().info("📡 MultiSensorPublisher node started")
