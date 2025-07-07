@@ -27,3 +27,5 @@ get-docker.sh
 # Logs
 *.log
 core
+detection_images/
+*.jpg
