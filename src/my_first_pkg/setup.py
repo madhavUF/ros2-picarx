@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'my_first_pkg'
 
@@ -10,6 +12,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -20,6 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            # Original nodes
             'drive_node = my_first_pkg.drive_node:main',
             'wheel_command_publisher = my_first_pkg.wheel_command_publisher:main',
             'wheel_command_listener_test = my_first_pkg.wheel_command_listener_test:main',
@@ -30,6 +35,13 @@ setup(
             'camera_subscriber = my_first_pkg.camera_subscriber:main',
             'autonomous_obstacle_avoidance = my_first_pkg.autonomous_obstacle_avoidance:main',
             'multi_sensor_subscriber = my_first_pkg.multi_sensor_subscriber:main',
+
+            # New ROS2 person-following nodes
+            'yolo_detector_node = my_first_pkg.yolo_detector_node:main',
+            'person_tracker_node = my_first_pkg.person_tracker_node:main',
+            'behavior_controller_node = my_first_pkg.behavior_controller_node:main',
+            'robot_controller_node = my_first_pkg.robot_controller_node:main',
+            'camera_servo_node = my_first_pkg.camera_servo_node:main',
         ],
     },
 )

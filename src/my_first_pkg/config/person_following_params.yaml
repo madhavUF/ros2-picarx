@@ -1,0 +1,49 @@
+/**:
+  ros__parameters:
+    # YOLO Detector Parameters
+    yolo_detector:
+      model_path: "yolov8n.pt"
+      confidence_threshold: 0.5
+      camera_device: "/dev/video10"
+      publish_rate: 10.0
+      publish_annotated_image: false
+
+    # Person Tracker Parameters
+    person_tracker:
+      min_confidence: 0.5
+      min_area: 5000.0
+      lost_threshold: 10  # frames before switching to scan mode
+
+    # Behavior Controller Parameters
+    behavior_controller:
+      # Speed settings
+      base_speed: 25.0
+      turn_speed: 20.0
+      steering_angle: 15.0
+
+      # Horizontal centering
+      horizontal_deadzone: 80.0  # pixels
+
+      # Distance thresholds (based on bounding box area in pixels)
+      area_too_close: 150000.0   # Back up when person is this close
+      area_good_min: 50000.0      # Good following distance minimum
+      area_good_max: 150000.0     # Good following distance maximum
+      area_medium: 15000.0        # Medium distance threshold
+
+      # Obstacle avoidance
+      obstacle_emergency_distance: 20.0  # cm - emergency stop
+      obstacle_warning_distance: 30.0    # cm - warning distance
+
+      # Camera tracking
+      camera_pan_gain: 0.1        # Proportional gain for pan tracking
+      camera_tilt_angle: 0.0      # Default tilt angle
+
+    # Robot Controller Parameters
+    robot_controller:
+      simulation_mode: false
+
+    # Camera Servo Parameters
+    camera_servo:
+      simulation_mode: false
+      default_pan: 0.0
+      default_tilt: 0.0
