@@ -7,6 +7,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -21,8 +22,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES std_msgs sensor_msgs
 )
 
-# Install Python modules
-ament_python_install_package(${PROJECT_NAME})
+# Install Python modules (handled by setup.py via ament_cmake_python)
+# ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
 install(PROGRAMS
