@@ -24,19 +24,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            # Original nodes
-            'drive_node = my_first_pkg.drive_node:main',
-            'wheel_command_publisher = my_first_pkg.wheel_command_publisher:main',
-            'wheel_command_listener_test = my_first_pkg.wheel_command_listener_test:main',
-            'wheel_command_listener = my_first_pkg.wheel_command_listener:main',
-            'sensor_reader = my_first_pkg.sensor_reader:main',
+            # Active sensor publisher (used in launch files)
             'multi_sensor_publisher = my_first_pkg.multi_sensor_publisher:main',
-            'camera_publisher = my_first_pkg.camera_publisher:main',
-            'camera_subscriber = my_first_pkg.camera_subscriber:main',
-            'autonomous_obstacle_avoidance = my_first_pkg.autonomous_obstacle_avoidance:main',
-            'multi_sensor_subscriber = my_first_pkg.multi_sensor_subscriber:main',
 
-            # New ROS2 person-following nodes
+            # Core ROS2 person-following pipeline nodes
             'yolo_detector_node = my_first_pkg.yolo_detector_node:main',
             'person_tracker_node = my_first_pkg.person_tracker_node:main',
             'behavior_controller_node = my_first_pkg.behavior_controller_node:main',

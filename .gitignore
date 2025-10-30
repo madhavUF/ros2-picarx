@@ -11,6 +11,12 @@ __pycache__/
 *.jpg
 *.png
 images/
+detection_images/
+
+# Model files
+*.pt
+*.onnx
+*.weights
 
 # Docker files
 get-docker.sh
@@ -19,6 +25,7 @@ get-docker.sh
 .DS_Store
 *.swp
 *.swo
+core
 
 # IDE files
 .vscode/
@@ -26,6 +33,3 @@ get-docker.sh
 
 # Logs
 *.log
-core
-detection_images/
-*.jpg

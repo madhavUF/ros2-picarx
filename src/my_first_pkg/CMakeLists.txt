@@ -26,16 +26,9 @@ ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
 install(PROGRAMS
-  my_first_pkg/drive_node.py
-  my_first_pkg/wheel_command_publisher.py
-  my_first_pkg/wheel_command_listener.py
-  my_first_pkg/wheel_command_listener_test.py
-  my_first_pkg/sensor_reader.py
+  # Active sensor publisher
   my_first_pkg/multi_sensor_publisher.py
-  my_first_pkg/camera_publisher.py
-  my_first_pkg/camera_subscriber.py
-  my_first_pkg/autonomous_obstacle_avoidance.py
-  my_first_pkg/multi_sensor_subscriber.py
+  # Core ROS2 person-following pipeline nodes
   my_first_pkg/yolo_detector_node.py
   my_first_pkg/person_tracker_node.py
   my_first_pkg/behavior_controller_node.py
