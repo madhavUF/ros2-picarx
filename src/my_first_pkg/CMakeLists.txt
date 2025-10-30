@@ -22,21 +22,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES std_msgs sensor_msgs
 )
 
-# Install Python modules (handled by setup.py via ament_cmake_python)
-# ament_python_install_package(${PROJECT_NAME})
-
-# Install Python executables
-install(PROGRAMS
-  # Active sensor publisher
-  my_first_pkg/multi_sensor_publisher.py
-  # Core ROS2 person-following pipeline nodes
-  my_first_pkg/yolo_detector_node.py
-  my_first_pkg/person_tracker_node.py
-  my_first_pkg/behavior_controller_node.py
-  my_first_pkg/robot_controller_node.py
-  my_first_pkg/camera_servo_node.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# Install Python package (entry points defined in setup.py)
+if(NOT TARGET ament_cmake_python_build_${PROJECT_NAME}_egg)
+  ament_python_install_package(${PROJECT_NAME})
+endif()
 
 # Install launch files
 install(DIRECTORY

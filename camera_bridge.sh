@@ -16,7 +16,7 @@ echo "✅ Loopback device ready: /dev/video10"
 
 # Start the bridge (simplified)
 echo "🚀 Starting camera bridge..."
-libcamera-vid -t 0 --width 640 --height 480 --framerate 30 --codec yuv420 --output - --nopreview | \
+rpicam-vid -t 0 --width 640 --height 480 --framerate 30 --codec yuv420 --output - --nopreview 2>/dev/null | \
 ffmpeg -f rawvideo -pix_fmt yuv420p -s 640x480 -r 30 -i - -pix_fmt yuv420p -f v4l2 /dev/video10 > /dev/null 2>&1 &
 
 BRIDGE_PID=$!
