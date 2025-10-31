@@ -47,7 +47,7 @@ def generate_launch_description():
     # YOLO Detector Node
     yolo_detector = Node(
         package='my_first_pkg',
-        executable='yolo_detector_node',
+        executable='yolo_detector_node.py',
         name='yolo_detector',
         output='screen',
         parameters=[{
@@ -62,7 +62,7 @@ def generate_launch_description():
     # Person Tracker Node
     person_tracker = Node(
         package='my_first_pkg',
-        executable='person_tracker_node',
+        executable='person_tracker_node.py',
         name='person_tracker',
         output='screen',
         parameters=[{
@@ -75,7 +75,7 @@ def generate_launch_description():
     # Behavior Controller Node
     behavior_controller = Node(
         package='my_first_pkg',
-        executable='behavior_controller_node',
+        executable='behavior_controller_node.py',
         name='behavior_controller',
         output='screen',
         parameters=[{
@@ -97,7 +97,7 @@ def generate_launch_description():
     # Robot Controller Node
     robot_controller = Node(
         package='my_first_pkg',
-        executable='robot_controller_node',
+        executable='robot_controller_node.py',
         name='robot_controller',
         output='screen',
         parameters=[{
@@ -108,7 +108,7 @@ def generate_launch_description():
     # Camera Servo Node
     camera_servo = Node(
         package='my_first_pkg',
-        executable='camera_servo_node',
+        executable='camera_servo_node.py',
         name='camera_servo',
         output='screen',
         parameters=[{
@@ -121,7 +121,7 @@ def generate_launch_description():
     # Multi Sensor Publisher (ultrasonic + grayscale)
     multi_sensor = Node(
         package='my_first_pkg',
-        executable='multi_sensor_publisher',
+        executable='multi_sensor_publisher.py',
         name='multi_sensor_publisher',
         output='screen'
     )

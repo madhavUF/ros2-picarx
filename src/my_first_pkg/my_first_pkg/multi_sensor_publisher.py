@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 os.environ['GPIOZERO_PIN_FACTORY'] = 'lgpio'
 

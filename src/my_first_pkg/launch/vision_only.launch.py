@@ -43,7 +43,7 @@ def generate_launch_description():
     # YOLO Detector Node
     yolo_detector = Node(
         package='my_first_pkg',
-        executable='yolo_detector_node',
+        executable='yolo_detector_node.py',
         name='yolo_detector',
         output='screen',
         parameters=[{
@@ -58,7 +58,7 @@ def generate_launch_description():
     # Person Tracker Node
     person_tracker = Node(
         package='my_first_pkg',
-        executable='person_tracker_node',
+        executable='person_tracker_node.py',
         name='person_tracker',
         output='screen',
         parameters=[{

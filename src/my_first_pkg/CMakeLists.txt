@@ -27,6 +27,17 @@ if(NOT TARGET ament_cmake_python_build_${PROJECT_NAME}_egg)
   ament_python_install_package(${PROJECT_NAME})
 endif()
 
+# Install Python scripts
+install(PROGRAMS
+  my_first_pkg/yolo_detector_node.py
+  my_first_pkg/person_tracker_node.py
+  my_first_pkg/behavior_controller_node.py
+  my_first_pkg/robot_controller_node.py
+  my_first_pkg/camera_servo_node.py
+  my_first_pkg/multi_sensor_publisher.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 # Install launch files
 install(DIRECTORY
   launch
