@@ -33,6 +33,9 @@ setup(
             'behavior_controller_node = my_first_pkg.behavior_controller_node:main',
             'robot_controller_node = my_first_pkg.robot_controller_node:main',
             'camera_servo_node = my_first_pkg.camera_servo_node:main',
+
+            # Mission nodes
+            'room_scanner_node = my_first_pkg.room_scanner_node:main',
         ],
     },
 )

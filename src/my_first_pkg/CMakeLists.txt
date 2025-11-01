@@ -35,6 +35,7 @@ install(PROGRAMS
   my_first_pkg/robot_controller_node.py
   my_first_pkg/camera_servo_node.py
   my_first_pkg/multi_sensor_publisher.py
+  my_first_pkg/room_scanner_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
