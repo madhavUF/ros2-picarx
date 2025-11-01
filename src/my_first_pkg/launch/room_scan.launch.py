@@ -5,7 +5,8 @@ Launch file for Room Scanning Mission
 This launches:
 1. YOLO Detector Node - for object detection
 2. Robot Controller Node - for movement control
-3. Room Scanner Node - mission orchestrator
+3. Camera Servo Node - for camera control
+4. Room Scanner Node - mission orchestrator
 
 Usage:
   ros2 launch my_first_pkg room_scan.launch.py
@@ -46,11 +47,18 @@ def generate_launch_description():
         description='Seconds to pause at each position for detection'
     )
 
+    camera_tilt_arg = DeclareLaunchArgument(
+        'camera_tilt',
+        default_value='35.0',
+        description='Camera tilt angle to look up at room (degrees)'
+    )
+
     # Get launch configurations
     simulation_mode = LaunchConfiguration('simulation_mode')
     yolo_model_path = LaunchConfiguration('yolo_model_path')
     scan_positions = LaunchConfiguration('scan_positions')
     pause_duration = LaunchConfiguration('pause_duration')
+    camera_tilt = LaunchConfiguration('camera_tilt')
 
     # YOLO Detector Node
     yolo_detector = Node(
@@ -78,6 +86,19 @@ def generate_launch_description():
         }]
     )
 
+    # Camera Servo Node
+    camera_servo = Node(
+        package='my_first_pkg',
+        executable='camera_servo_node.py',
+        name='camera_servo_node',
+        output='screen',
+        parameters=[{
+            'simulation_mode': simulation_mode,
+            'default_pan': 0.0,
+            'default_tilt': 0.0,
+        }]
+    )
+
     # Room Scanner Mission Node
     room_scanner = Node(
         package='my_first_pkg',
@@ -90,6 +111,7 @@ def generate_launch_description():
             'scan_positions': scan_positions,
             'pause_duration': pause_duration,
             'confidence_threshold': 0.6,
+            'camera_tilt_angle': camera_tilt,
         }]
     )
 
@@ -99,9 +121,11 @@ def generate_launch_description():
         yolo_model_path_arg,
         scan_positions_arg,
         pause_duration_arg,
+        camera_tilt_arg,
 
         # Nodes
         yolo_detector,
         robot_controller,
+        camera_servo,
         room_scanner,
     ])

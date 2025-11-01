@@ -9,11 +9,12 @@ This node orchestrates a room scanning mission where the robot:
 
 Subscribes to: /vision/detections (DetectionArray)
 Publishes to: /control/robot_command (RobotCommand)
+            /control/camera_command (CameraCommand)
 """
 
 import rclpy
 from rclpy.node import Node
-from my_first_pkg.msg import DetectionArray, RobotCommand
+from my_first_pkg.msg import DetectionArray, RobotCommand, CameraCommand
 from std_msgs.msg import Header
 import time
 from collections import defaultdict
@@ -29,12 +30,14 @@ class RoomScannerNode(Node):
         self.declare_parameter('scan_positions', 8)  # 360/45 = 8 positions
         self.declare_parameter('pause_duration', 2.0)  # seconds to pause and observe
         self.declare_parameter('confidence_threshold', 0.6)
+        self.declare_parameter('camera_tilt_angle', 35.0)  # Tilt up to see room, not floor
 
         self.scan_speed = self.get_parameter('scan_speed').value
         self.turn_angle = self.get_parameter('turn_angle').value
         self.scan_positions = self.get_parameter('scan_positions').value
         self.pause_duration = self.get_parameter('pause_duration').value
         self.confidence_threshold = self.get_parameter('confidence_threshold').value
+        self.camera_tilt_angle = self.get_parameter('camera_tilt_angle').value
 
         # State variables
         self.objects_found = defaultdict(int)  # {object_name: count}
@@ -44,6 +47,7 @@ class RoomScannerNode(Node):
 
         # Publishers and Subscribers
         self.cmd_pub = self.create_publisher(RobotCommand, '/control/robot_command', 10)
+        self.camera_pub = self.create_publisher(CameraCommand, '/control/camera_command', 10)
         self.detection_sub = self.create_subscription(
             DetectionArray, '/vision/detections',
             self.detection_callback, 10)
@@ -51,7 +55,8 @@ class RoomScannerNode(Node):
         self.get_logger().info('Room Scanner Node initialized')
         self.get_logger().info(f'Configuration: {self.scan_positions} positions, '
                               f'{self.pause_duration}s pause, '
-                              f'{self.confidence_threshold} confidence threshold')
+                              f'{self.confidence_threshold} confidence threshold, '
+                              f'{self.camera_tilt_angle}° camera tilt')
 
         # Start mission after a short delay
         self.startup_timer = self.create_timer(2.0, self.start_mission_timer)
@@ -83,12 +88,28 @@ class RoomScannerNode(Node):
         self.cmd_pub.publish(cmd)
         self.get_logger().info(f'Command sent: {action} (speed={speed}, angle={angle})')
 
+    def send_camera_command(self, pan_angle=0.0, tilt_angle=0.0):
+        """Send a camera servo command"""
+        cmd = CameraCommand()
+        cmd.header = Header()
+        cmd.header.stamp = self.get_clock().now().to_msg()
+        cmd.pan_angle = float(pan_angle)
+        cmd.tilt_angle = float(tilt_angle)
+        cmd.reset_to_center = False
+        self.camera_pub.publish(cmd)
+        self.get_logger().info(f'Camera command: Pan={pan_angle}°, Tilt={tilt_angle}°')
+
     def start_mission(self):
         """Execute the room scanning mission"""
         self.mission_active = True
         self.get_logger().info('=' * 60)
         self.get_logger().info('MISSION START: Room Scanning Initiated')
         self.get_logger().info('=' * 60)
+
+        # First, tilt camera up to see the room instead of the floor
+        self.get_logger().info(f'📷 Tilting camera up to {self.camera_tilt_angle}° to see room objects...')
+        self.send_camera_command(pan_angle=0.0, tilt_angle=self.camera_tilt_angle)
+        time.sleep(1.0)  # Wait for camera to move
 
         # Calculate rotation per step
         degrees_per_step = 360.0 / self.scan_positions
