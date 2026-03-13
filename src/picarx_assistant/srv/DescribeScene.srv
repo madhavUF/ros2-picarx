@@ -1,0 +1,6 @@
+# Request scene description from VLM
+bool include_detections  # Include YOLO detections in response
+---
+string description       # Natural language scene description
+string[] objects_detected
+float32 confidence

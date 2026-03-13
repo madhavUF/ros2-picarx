@@ -1,0 +1,8 @@
+# YOLO and Vision Dependencies
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+
+# Note: ROS1 cv_bridge must be installed via apt (ros-<distro>-cv-bridge)

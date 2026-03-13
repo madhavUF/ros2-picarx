@@ -1,0 +1,5 @@
+# Ask a question about the current camera view
+string question
+---
+string answer
+float32 confidence

@@ -1,0 +1,89 @@
+# PiCar-X Voice Assistant Configuration
+
+# Assistant personality and behavior
+assistant:
+  name: "PiCar"
+  wake_word: ""  # Leave empty for always-listening mode, or set "hey picar"
+
+  # System prompt for the AI personality
+  system_prompt: |
+    You are PiCar, a friendly wheeled robot assistant. You can move around,
+    look at things with your camera, and describe what you see.
+
+    Your capabilities:
+    - Move forward, backward, turn left/right
+    - Pan and tilt your camera to look around
+    - Detect objects using computer vision
+    - Measure distance to obstacles
+
+    Keep responses concise - you'll be speaking them aloud.
+    Be helpful, curious, and enjoy exploring your environment.
+
+# Voice input/output settings
+voice:
+  # Speech-to-Text configuration
+  stt:
+    backend: "whisper_local"  # whisper_local, whisper_api
+    model: "base.en"          # tiny.en, base.en, small.en, medium.en
+    language: "en"
+    device: "cpu"             # cpu, cuda
+
+  # Text-to-Speech configuration
+  tts:
+    backend: "piper"          # piper, openai, espeak
+    voice: "en_US-lessac-medium"  # Piper voice model
+    openai_voice: "alloy"     # For OpenAI: alloy, echo, fable, onyx, nova, shimmer
+    speed: 1.0
+
+  # Voice Activity Detection
+  vad:
+    aggressiveness: 2         # 0-3, higher = more aggressive filtering
+    min_speech_duration: 0.3  # Minimum speech duration in seconds
+    silence_duration: 0.8     # Silence duration to end utterance
+
+# Hardware configuration
+hardware:
+  # Microphone settings
+  microphone:
+    device_index: -1          # -1 for default device
+    sample_rate: 16000
+    channels: 1
+
+  # Speaker settings
+  speaker:
+    device: "default"
+
+  # Camera settings
+  camera:
+    device: "/dev/video10"
+    width: 640
+    height: 480
+
+# LLM configuration
+llm:
+  provider: "anthropic"       # anthropic, openai
+  model: "claude-sonnet-4-20250514"
+  max_tokens: 500
+  temperature: 0.7
+
+# Vision-Language Model
+vlm:
+  enabled: true
+  backend: "claude"           # claude, openai
+  model: "claude-sonnet-4-20250514"
+  max_tokens: 300
+
+# Robot behavior settings
+robot:
+  # Movement defaults
+  default_speed: 25           # 0-100
+  turn_speed: 20
+  max_speed: 50
+
+  # Safety settings
+  obstacle_stop_distance: 20  # cm - emergency stop
+  obstacle_slow_distance: 40  # cm - slow down
+
+  # Camera defaults
+  default_pan: 0
+  default_tilt: 0

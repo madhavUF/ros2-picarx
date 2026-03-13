@@ -1,0 +1,30 @@
+# PiCar-X Voice Assistant Dependencies
+
+# Core AI
+anthropic>=0.18.0
+openai>=1.0.0  # Optional, for OpenAI backend
+
+# Voice Processing
+pyaudio>=0.2.13
+webrtcvad>=2.0.10
+faster-whisper>=0.10.0  # Local STT
+
+# TTS (piper is installed separately)
+# pip install piper-tts  # or download binary
+
+# Vision
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# MCP Server
+mcp>=0.9.0
+
+# ROS2 dependencies (installed via apt)
+# ros-humble-rclpy
+# ros-humble-std-msgs
+# ros-humble-sensor-msgs
+# ros-humble-cv-bridge
+
+# Optional: For local VLM
+# transformers>=4.35.0
+# torch>=2.0.0

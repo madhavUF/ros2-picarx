@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- YOLO Detector Node -->
+  <node name="yolo_detector" pkg="yolo_detector_ros1" type="yolo_detector_node.py" output="screen">
+    <!-- Model configuration -->
+    <param name="model_path" value="$(find yolo_detector_ros1)/yolov8n.pt"/>
+    <param name="confidence_threshold" value="0.5"/>
+
+    <!-- Camera configuration -->
+    <param name="camera_device" value="/dev/video0"/>
+    <param name="publish_rate" value="10.0"/>
+
+    <!-- Publishing options -->
+    <param name="publish_annotated_image" value="true"/>
+  </node>
+
+  <!-- Optional: RViz for visualization -->
+  <!-- Uncomment to launch RViz automatically -->
+  <!--
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find yolo_detector_ros1)/config/yolo_detector.rviz" required="false"/>
+  -->
+</launch>

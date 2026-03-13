@@ -1,0 +1,7 @@
+# Execute a robot command through MCP gateway
+string command_type      # move, turn, look, scan, stop, etc.
+string parameters_json   # JSON-encoded parameters
+---
+bool success
+string result           # Result description or data
+string error_message    # Error if failed
